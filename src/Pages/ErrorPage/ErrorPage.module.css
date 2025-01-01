@@ -1,0 +1,26 @@
+.error {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.errorTitle {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.errorSubtitle, .errorLink {
+    font-size: 20px;
+}
+
+.errorLink {
+    margin-top: 10px;
+}
+
+.errorLink:hover {
+    text-decoration: underline;
+}
