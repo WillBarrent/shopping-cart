@@ -7,6 +7,11 @@ const routes = [
     element: <App />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/shop",
+    element: <App />,
+    errorElement: <ErrorPage />,
+  },
 ];
 
 export default routes;
