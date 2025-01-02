@@ -1,0 +1,46 @@
+.home {
+    height: 90vh;
+    width: 100%;
+    background-size: cover;
+    background-image: url(../../assets/background.jpg);
+    background-repeat: no-repeat;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.homeBackground {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .6);
+    width: 100%;
+    height: 100%;
+}
+
+.homeInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    position: relative;
+    z-index: 100;
+}
+
+.homeTitle {
+    color: white;
+    font-size: 75px;
+}
+
+.link {
+    font-size: 30px;
+    color: white;
+    background-color: #07c3bd;
+
+    padding: 10px 50px;
+}
+
+.link:hover {
+    background-color: rgba(7, 195, 189, .8);
+}
