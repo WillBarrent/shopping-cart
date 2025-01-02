@@ -1,0 +1,30 @@
+.header {
+    background-color: #07c3bd;
+    padding: 10px 50px;
+    height: 10vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.navigationLink {
+    color: white;
+    font-size: 30px;
+}
+
+.navigationLink:hover {
+    color: rgba(255, 255, 255, .8);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
