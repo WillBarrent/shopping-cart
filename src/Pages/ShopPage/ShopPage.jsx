@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./ShopPage.module.css";
+import Product from "../../Components/Product/Product";
 
 function ShopPage() {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ function ShopPage() {
           data = data.map((datum) => {
             return {
               id: datum.id,
-              image: datum.images[0].slice(datum.images[0].indexOf("h")),
+              imageUrl: datum.images[0].slice(datum.images[0].indexOf("h")),
               title: datum.title,
               price: datum.price,
               count: 1,
@@ -66,40 +67,17 @@ function ShopPage() {
         <div className={styles.products}>
           {products.map((product, index) => {
             return (
-              <div className={styles.product} key={product.id}>
-                <div className={styles.productImage}>
-                  <img
-                    className={styles.productImg}
-                    src={product.image}
-                    alt="Product image"
-                  />
-                </div>
-                <div className={styles.productTitle}>{product.title}</div>
-                <div className={styles.productPrice}>{product.price}$</div>
-                <div className={styles.addToCart}>
-                  <div className={styles.productCount}>
-                    <button
-                      onClick={() => countDecrement(product, index)}
-                      className={styles.countDecrement}
-                    >
-                      -
-                    </button>
-                    <input
-                      className={styles.countNumber}
-                      type="text"
-                      disabled
-                      value={product.count}
-                    />
-                    <button
-                      onClick={() => countIncrement(product, index)}
-                      className={styles.countIncrement}
-                    >
-                      +
-                    </button>
-                  </div>
-                  <button className={styles.addToCartBtn}>Add To Cart</button>
-                </div>
-              </div>
+              <Product
+                key={product.id}
+                imageUrl={product.imageUrl}
+                title={product.title}
+                price={product.price}
+                count={product.count}
+                countIncrement={countIncrement}
+                countDecrement={countDecrement}
+                productData={product}
+                productIndex={index}
+              />
             );
           })}
         </div>
