@@ -10,8 +10,11 @@ const routes = [
   {
     path: "/shop",
     element: <App />,
-    errorElement: <ErrorPage />,
   },
+  {
+    path: "/cart",
+    element: <App />,
+  }
 ];
 
 export default routes;
