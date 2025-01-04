@@ -9,7 +9,8 @@ function Product({
   countIncrement,
   countDecrement,
   productData,
-  productIndex
+  productIndex,
+  addToCart,
 }) {
   return (
     <div className={styles.product}>
@@ -39,7 +40,12 @@ function Product({
             +
           </button>
         </div>
-        <button className={styles.addToCartBtn}>Add To Cart</button>
+        <button
+          onClick={() => addToCart(productData)}
+          className={styles.addToCartBtn}
+        >
+          Add To Cart
+        </button>
       </div>
     </div>
   );
@@ -54,6 +60,7 @@ Product.propTypes = {
   countDecrement: PropTypes.func,
   productData: PropTypes.object,
   productIndex: PropTypes.number,
+  addToCart: PropTypes.func,
 };
 
 export default Product;

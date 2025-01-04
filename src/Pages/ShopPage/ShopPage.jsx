@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import styles from "./ShopPage.module.css";
+import PropTypes from "prop-types";
 import Product from "../../Components/Product/Product";
 
-function ShopPage() {
+function ShopPage({
+  shoppingCart,
+  addToCart
+}) {
   const [products, setProducts] = useState([]);
 
+  console.log(shoppingCart);
+  
   useEffect(() => {
     let ignore = false;
 
@@ -77,6 +83,7 @@ function ShopPage() {
                 countDecrement={countDecrement}
                 productData={product}
                 productIndex={index}
+                addToCart={addToCart}
               />
             );
           })}
@@ -84,6 +91,11 @@ function ShopPage() {
       )}
     </main>
   );
+}
+
+ShopPage.propTypes = {
+  shoppingCart: PropTypes.array,
+  addToCart: PropTypes.func,
 }
 
 export default ShopPage;
