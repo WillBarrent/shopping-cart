@@ -41,7 +41,7 @@ function Product({
           </button>
         </div>
         <button
-          onClick={() => addToCart(productData)}
+          onClick={() => addToCart(productData, count)}
           className={styles.addToCartBtn}
         >
           Add To Cart
