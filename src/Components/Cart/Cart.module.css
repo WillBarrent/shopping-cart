@@ -1,0 +1,62 @@
+.cart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartImage {
+    width: 600px;
+
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.cartImg {
+    width: 150px;
+}
+
+.cartTitle {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.cartCost {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.cartCount {
+    display: flex;
+}
+
+.countIncrement,
+.countDecrement {
+  padding: 0px 10px;
+  outline: none;
+  border: 1px solid rgba(7, 195, 189, 1);
+  font-family: inherit;
+  background-color: transparent;
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+.countNumber {
+  display: block;
+  width: 50px;
+  border: 1px solid rgba(7, 195, 189, 0.3);
+  background-color: transparent;
+
+  outline: none;
+  text-align: center;
+  font-size: 20px;
+}
+
+.cartRemove {
+    cursor: pointer;
+}
+
+.removeBtn:hover {
+    fill: rgb(165, 42, 42, .1);
+}
