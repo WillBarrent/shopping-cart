@@ -1,14 +1,13 @@
-import { useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Header/Header";
 import HomePage from "./Pages/HomePage/HomePage";
 import ShopPage from "./Pages/ShopPage/ShopPage";
 import CartPage from "./Pages/CartPage/CartPage";
 import { useState } from "react";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 
 function App() {
-  const location = useLocation();
-  const locationPathName = location.pathname;
 
   const [shoppingCart, setShoppingCart] = useState([]);
 
@@ -72,18 +71,27 @@ function App() {
   return (
     <>
       <Header />
-      {locationPathName === "/shop" ? (
-        <ShopPage shoppingCart={shoppingCart} addToCart={addToCart} />
-      ) : locationPathName === "/cart" ? (
-        <CartPage
-          shoppingCart={shoppingCart}
-          removeFromCart={removeFromCart}
-          cartCountIncrement={cartCountIncrement}
-          cartCountDecrement={cartCountDecrement}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/shop"
+          element={
+            <ShopPage shoppingCart={shoppingCart} addToCart={addToCart} />
+          }
         />
-      ) : (
-        <HomePage />
-      )}
+        <Route
+          path="/cart"
+          element={
+            <CartPage
+              shoppingCart={shoppingCart}
+              removeFromCart={removeFromCart}
+              cartCountIncrement={cartCountIncrement}
+              cartCountDecrement={cartCountDecrement}
+            />
+          }
+        />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
     </>
   );
 }
