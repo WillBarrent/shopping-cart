@@ -16,7 +16,7 @@ function CartPage({
       totalPrice += shoppingCart[i].price * shoppingCart[i].count;
     }
 
-    return totalPrice;
+    return Math.trunc(totalPrice * 1000) / 1000;
   }
 
   const totalPrice = totalPriceCount();
