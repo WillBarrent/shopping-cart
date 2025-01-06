@@ -22,7 +22,7 @@ function Header() {
           </li>
         </ul>
         <div className={styles.shoppingCart}>
-          <Link className={styles.navigationLink} to="/cart">
+          <Link data-testid="cart" className={styles.navigationLink} to="/cart">
             <ShoppingCart size={48}/>
           </Link>
         </div>
