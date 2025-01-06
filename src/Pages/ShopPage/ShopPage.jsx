@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import styles from "./ShopPage.module.css";
 import PropTypes from "prop-types";
 import Product from "../../Components/Product/Product";
+import { StoreIcon } from "lucide-react";
 
 function ShopPage({
   shoppingCart,
   addToCart
 }) {
   const [products, setProducts] = useState([]);
-
-  console.log(shoppingCart);
   
   useEffect(() => {
     let ignore = false;
@@ -18,7 +17,7 @@ function ShopPage({
       if (!ignore) {
         (async function () {
           const response = await fetch(
-            "https://api.escuelajs.co/api/v1/products?offset=0&limit=15",
+            "https://fakestoreapi.com/products",
             {
               mode: "cors",
             }
@@ -28,7 +27,7 @@ function ShopPage({
           data = data.map((datum) => {
             return {
               id: datum.id,
-              imageUrl: datum.images[0].slice(datum.images[0].indexOf("h")),
+              imageUrl: datum.image,
               title: datum.title,
               price: datum.price,
               count: 1,
@@ -67,6 +66,10 @@ function ShopPage({
 
   return (
     <main className={styles.shop}>
+      <div className={styles.shopInfo}>
+        <StoreIcon size={48} />
+        <h1 className={styles.shopTitle}>Product Page</h1>
+      </div>
       {products.length === 0 ? (
         <div className={styles.loading}>Loading...</div>
       ) : (
