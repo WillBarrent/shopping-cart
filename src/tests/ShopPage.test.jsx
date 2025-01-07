@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { getProductsData } from "../Pages/ShopPage/ShopPage";
+import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import ShopPage, { getProductsData } from "../Pages/ShopPage/ShopPage";
 
 global.fetch = vi.fn();
 
@@ -41,7 +41,18 @@ describe("Fetching products data", () => {
     expect(fetch).toHaveBeenCalledWith("https://fakestoreapi.com/products", {
       mode: "cors",
     });
-    
+
     expect(products).toStrictEqual(productsData);
   });
+
+  it("shows loading process text while API request is in progress", async () => {
+    render(<ShopPage />);
+    const loading = screen.getByText("Loading...");
+
+    expect(loading).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
+  });
+
+  
 });
