@@ -1,6 +1,11 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from "@testing-library/react";
 import ShopPage, { getProductsData } from "../Pages/ShopPage/ShopPage";
+import userEvent from "@testing-library/user-event";
 
 global.fetch = vi.fn();
 
@@ -51,8 +56,68 @@ describe("Fetching products data", () => {
 
     expect(loading).toBeInTheDocument();
 
-    await waitForElementToBeRemoved(() => screen.getByText('Loading...'));
+    await waitForElementToBeRemoved(() => screen.getByText("Loading..."));
+  });
+});
+
+describe("Testing product card", () => {
+  it("increase the count correctly", async () => {
+    render(<ShopPage />);
+
+    const user = userEvent.setup();
+
+    const loading = screen.getByText("Loading...");
+
+    expect(loading).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(() => screen.queryByText("Loading..."));
+
+    const incrementButton = screen.getAllByTestId(
+      "product-counter-increment"
+    )[0];
+
+    expect(
+      screen.getAllByTestId("product-counter")[0].getAttribute("value")
+    ).toBe("1");
+
+    await user.click(incrementButton);
+
+    expect(
+      screen.getAllByTestId("product-counter")[0].getAttribute("value")
+    ).toBe("2");
   });
 
-  
+  it("decrease the count correctly", async () => {
+    render(<ShopPage />);
+
+    const user = userEvent.setup();
+
+    const loading = screen.getByText("Loading...");
+
+    expect(loading).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(() => screen.queryByText("Loading..."));
+
+    const incrementButton = screen.getAllByTestId(
+      "product-counter-increment"
+    )[0];
+
+    const decrementButton = screen.getAllByTestId("product-counter-decrement")[0];
+
+    expect(
+      screen.getAllByTestId("product-counter")[0].getAttribute("value")
+    ).toBe("1");
+
+    await user.click(incrementButton);
+
+    expect(
+      screen.getAllByTestId("product-counter")[0].getAttribute("value")
+    ).toBe("2");
+
+    await user.click(decrementButton);
+
+    expect(
+      screen.getAllByTestId("product-counter")[0].getAttribute("value")
+    ).toBe("1");
+  })
 });
