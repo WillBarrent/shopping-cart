@@ -4,6 +4,29 @@ import PropTypes from "prop-types";
 import Product from "../../Components/Product/Product";
 import { StoreIcon } from "lucide-react";
 
+export async function getProductsData() {
+  const response = await fetch(
+    "https://fakestoreapi.com/products",
+    {
+      mode: "cors",
+    }
+  );
+
+  let data = await response.json();
+
+  data = data.map((product) => {
+    return {
+      id: product.id,
+      image: product.image,
+      title: product.title,
+      price: product.price,
+      count: 1,
+    };
+  });
+
+  return data;
+}
+
 function ShopPage({
   shoppingCart,
   addToCart
@@ -16,23 +39,7 @@ function ShopPage({
     try {
       if (!ignore) {
         (async function () {
-          const response = await fetch(
-            "https://fakestoreapi.com/products",
-            {
-              mode: "cors",
-            }
-          );
-
-          let data = await response.json();
-          data = data.map((datum) => {
-            return {
-              id: datum.id,
-              imageUrl: datum.image,
-              title: datum.title,
-              price: datum.price,
-              count: 1,
-            };
-          });
+          const data = await getProductsData();
 
           setProducts(data);
         })();
@@ -78,7 +85,7 @@ function ShopPage({
             return (
               <Product
                 key={product.id}
-                imageUrl={product.imageUrl}
+                imageUrl={product.image}
                 title={product.title}
                 price={product.price}
                 count={product.count}
