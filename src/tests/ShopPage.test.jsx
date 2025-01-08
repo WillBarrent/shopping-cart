@@ -6,6 +6,7 @@ import {
 } from "@testing-library/react";
 import ShopPage, { getProductsData } from "../Pages/ShopPage/ShopPage";
 import userEvent from "@testing-library/user-event";
+import CartPage from "../Pages/CartPage/CartPage";
 
 global.fetch = vi.fn();
 
@@ -102,7 +103,9 @@ describe("Testing product card", () => {
       "product-counter-increment"
     )[0];
 
-    const decrementButton = screen.getAllByTestId("product-counter-decrement")[0];
+    const decrementButton = screen.getAllByTestId(
+      "product-counter-decrement"
+    )[0];
 
     expect(
       screen.getAllByTestId("product-counter")[0].getAttribute("value")
@@ -119,5 +122,51 @@ describe("Testing product card", () => {
     expect(
       screen.getAllByTestId("product-counter")[0].getAttribute("value")
     ).toBe("1");
-  })
+  });
+});
+
+describe("Shopping Cart", () => {
+  it("Add/remove product to/from the shopping cart page", async () => {
+    const shoppingCart = [];
+    const addToCart = vi.fn();
+    const removeFromCart = vi.fn();
+
+    /**
+     * I didn't implement add and remove from cart functionality
+     * correctly here as in my actual component because it is just mock
+     * implementation and I would like to keep it simple for test purposes.
+     */
+
+    addToCart.mockImplementation((product) => {
+      shoppingCart.push(product);
+    });
+
+    removeFromCart.mockImplementation((product) => {
+      shoppingCart.pop(product);
+    });
+
+    render(<ShopPage shoppingCart={[]} addToCart={addToCart} />);
+
+    const user = userEvent.setup();
+
+    const loading = screen.getByText("Loading...");
+
+    expect(loading).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(() => screen.queryByText("Loading..."));
+
+    const addToCartBtn = screen.getAllByTestId("add-to-cart")[0];
+
+    await user.click(addToCartBtn);
+
+    render(<CartPage removeFromCart={removeFromCart} shoppingCart={shoppingCart} />);
+
+    expect(shoppingCart.length).toBe(1);
+
+    const removeFromCartBtn = screen.getAllByTestId("remove-from-cart")[0];
+
+    await user.click(removeFromCartBtn);
+
+    expect(shoppingCart.length).toBe(0);
+  });
 });
