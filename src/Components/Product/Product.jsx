@@ -24,6 +24,7 @@ function Product({
           <button
             onClick={() => countDecrement(productData, productIndex)}
             className={styles.countDecrement}
+            data-testid="product-counter-decrement"
           >
             -
           </button>
@@ -32,10 +33,12 @@ function Product({
             type="text"
             disabled
             value={count}
+            data-testid="product-counter"
           />
           <button
             onClick={() => countIncrement(productData, productIndex)}
             className={styles.countIncrement}
+            data-testid="product-counter-increment"
           >
             +
           </button>
@@ -43,6 +46,7 @@ function Product({
         <button
           onClick={() => addToCart(productData, count)}
           className={styles.addToCartBtn}
+          data-testid="add-to-cart"
         >
           Add To Cart
         </button>

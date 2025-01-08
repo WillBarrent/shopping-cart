@@ -39,7 +39,11 @@ function Cart({
         </button>
       </div>
       <div className={styles.cartCost}>{price * count}$</div>
-      <div className={styles.cartRemove} onClick={() => removeFromCart(id)}>
+      <div
+        data-testid="remove-from-cart"
+        className={styles.cartRemove}
+        onClick={() => removeFromCart(id)}
+      >
         <CircleX className={styles.removeBtn} size={30} color="red" />
       </div>
     </div>
