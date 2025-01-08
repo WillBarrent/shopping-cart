@@ -34,7 +34,7 @@ function CartPage({
               key={cart.id}
               id={cart.id}
               count={cart.count}
-              imageUrl={cart.imageUrl}
+              imageUrl={cart.image}
               price={cart.price}
               title={cart.title}
               removeFromCart={removeFromCart}
